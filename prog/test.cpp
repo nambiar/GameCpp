@@ -10,6 +10,7 @@
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+const char* filepath[5] = {"press.bmp","up.bmp","down.bmp","left.bmp","right.bmp"};
 
 Rgb rgb = {0x32,0x56,0xff};
 ConstructScreen screen(SCREEN_WIDTH,SCREEN_HEIGHT,&rgb);
@@ -19,12 +20,35 @@ public:
     int callbackProcessSDLEvents(int);
     
 };
+
 int ProcessEvents::callbackProcessSDLEvents(int events)
 {
-        screen.GetImage("images_1.bmp",true);
-    screen.ScreenFlash(2000);
-  printf("SCallback");
-  return 0;
+
+    //Select surfaces based on key press
+    switch(events )
+    {
+        case KEY_PRESS_SURFACE_UP:
+        screen.SetCurrentSurface(KEY_PRESS_SURFACE_UP);
+        break;
+
+        case KEY_PRESS_SURFACE_DOWN:
+        screen.SetCurrentSurface(KEY_PRESS_SURFACE_DOWN);
+        break;
+
+        case KEY_PRESS_SURFACE_LEFT:
+        screen.SetCurrentSurface(KEY_PRESS_SURFACE_LEFT);
+        break;
+
+        case KEY_PRESS_SURFACE_RIGHT:
+        screen.SetCurrentSurface(KEY_PRESS_SURFACE_RIGHT);
+        break;
+
+        default:
+        screen.SetCurrentSurface(KEY_PRESS_SURFACE_DEFAULT);
+        break;
+    }
+    screen.LoadScreen();
+    return 0;
 }
 
 int main( int argc, char* args[] )
@@ -73,6 +97,11 @@ int main( int argc, char* args[] )
 #endif
 
     screen.GetImage("images_1.bmp",false);
+    for (int i = KEY_PRESS_SURFACE_DEFAULT; i < KEY_PRESS_SURFACE_TOTAL; ++i)
+    {
+        screen.LoadMedia(filepath[i],(KeyPressEvents)i);
+    }
+    //screen.LoadMedia();
     ProcessEvents ProcessEvents;
     Events event;
     event.SubscibeEventsCallback(&ProcessEvents);    
