@@ -16,8 +16,8 @@ class ConstructScreen
 public:
 	ConstructScreen(int width, int height,Rgb* rgb);
 	~ConstructScreen(void);
-	GetImage(const char* filename,bool apply);
-	ScreenFlash(int milliseconds);
+	void GetImage(const char* filename,bool apply);
+	void ScreenFlash(int milliseconds);
 	bool LoadMedia(const char* filename,KeyPressEvents events);
 	bool SetCurrentSurface(KeyPressEvents events);	
 	//Loads individual image

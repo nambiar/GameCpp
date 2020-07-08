@@ -44,12 +44,12 @@ ConstructScreen::~ConstructScreen(void)
 	
 }
 
-ConstructScreen::ScreenFlash(int milliSeconds)
+void ConstructScreen::ScreenFlash(int milliSeconds)
 {
 	SDL_Delay(milliSeconds);
 }
 
-ConstructScreen::GetImage(const char* path, bool apply)
+void ConstructScreen::GetImage(const char* path, bool apply)
 {
     //Load splash image
 	gimageOnSurface = SDL_LoadBMP(path);

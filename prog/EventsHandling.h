@@ -18,7 +18,9 @@ class EventsCallbackInterface
 {
 
 public:
-	virtual int callbackProcessSDLEvents(int events);
+	virtual int callbackProcessSDLEvents(int events)=0;
+    /* Added this based on this link */
+    /* https://stackoverflow.com/questions/307352/g-undefined-reference-to-typeinfo */
 };
 
 
